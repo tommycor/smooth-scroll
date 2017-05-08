@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	<title>Test smooth scroll</title>
+
+</head>
+
+<style type="text/css">
+
+	html, body {
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+
+
+	body.is-smooth-scroll {
+		overflow: hidden;
+		position: relative;
+	}
+
+
+
+	.container  {
+		width: 100%;
+		position: relative;
+	}
+
+
+
+	.item {
+		background-color: darkgrey;
+		width: 50vw;
+	}
+
+
+
+	.item:after {
+		padding-top: 100%;
+		content: '';
+		position: relative;
+		display: block;
+	}
+
+
+
+	.item:nth-child( even ) {
+		margin-left: 50vw;
+	}
+
+
+
+	.sticky-container {
+		position: relative;
+		width: 100%;
+		height: 500px;
+		margin-top: 50px;
+		background-color: green;
+		margin-top: 50px;
+	}
+
+
+
+	.item-fixed {
+		position: absolute;
+		top: 100px;
+		left: 0;
+		width: 100%;
+		height: 30px;
+		background-color: red;
+	}
+
+	#scrollbar-container {
+		background-color: grey;
+	}
+
+	#scrollbar {
+		background-color: black;
+	}
+
+</style>
+
+<script type="text/javascript" src="./clrz_smooth-scroll.js"></script>
+
+<body>
+
+
+
+	<div class="container js-smooth-scroll">
+
+		<div class="item"></div>
+
+		<div class="item"></div>
+
+		<div class="item"></div>
+
+		<div id="sticky-container" class="sticky-container">
+
+			<div data-container-id="sticky-container" class="js-fixed-element item-fixed" data-is-fixed="true"></div>
+
+		</div>
+
+		<div class="js-fixed-element item-fixed" data-is-fixed="false"></div>
+
+		<div class="item"></div>
+
+		<div class="item"></div>
+
+		<div class="item"></div>
+
+		<div class="item"></div>
+
+		<div class="item"></div>
+
+		<div class="item"></div>
+
+		<div class="item"></div>
+
+		<div class="item"></div>
+
+	</div>
+
+
+
+	<div id="scrollbar-container" class="js-scrollbar-container">
+
+		<div id="scrollbar" class="js-scrollbar"></div>
+
+	</div>
+
+</body>
+
+</html>
