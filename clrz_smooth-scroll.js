@@ -1,13 +1,14 @@
 window.onload = function() {
 
-	if ( ( isIE() && isIE() <= 9 ) || isTablet() ) {
+	console.log( isSafari() );
+
+	if ( ( isIE() && isIE() <= 9 ) || isSafari() || isTablet() ) {
+		alert('penis')
 		window.smoothScroll = new SmoothScroll( false );
 	}
 	else {
 		window.smoothScroll = new SmoothScroll( true );
 	}
-
-	// setTimeout( function() { setItemFixedStatus(); }, 1000)
 }
 
 function transformer(el, value) {
@@ -137,7 +138,12 @@ SmoothScroll.prototype.setCurrentScrollValue = function( value ) {
 }
 
 SmoothScroll.prototype.setScrollValue = function( value ) {
-	this.scrollValue = value;
+	if( this.isFakeScroll ) {
+		this.scrollValue = value;
+	}
+	else {
+		window.scrollTo(0, -value);
+	}
 
 	return value;
 }
@@ -251,7 +257,7 @@ Scrollbar.prototype.setScrollPosition = function( event ) {
 
 
 Scrollbar.prototype.styles = function() {
-	this.container.style.position 	= 'absolute';
+	this.container.style.position 	= 'fixed';
 	this.container.style.top 		= 0;
 	this.container.style.right 		= 0;
 	this.container.style.height 	= '100vh';
@@ -426,7 +432,7 @@ var VirtualScroll = (function(document) {
 	// Mutiply the touch action by two making the scroll a bit faster than finger movement
 	var touchMult = 2;
 	// Firefox on Windows needs a boost, since scrolling is very slow
-	var firefoxMult = 15;
+	var firefoxMult = 20;
 	// How many pixels to move with each key press
 	var keyStep = 120;
 	// General multiplier for all mousehweel including FF
@@ -510,17 +516,17 @@ var VirtualScroll = (function(document) {
 		event.deltaX = event.deltaY = 0;
 		switch(e.keyCode) {
 			case 37:
-				event.deltaX = -keyStep;
-				break;
+			event.deltaX = -keyStep;
+			break;
 			case 39:
-				event.deltaX = keyStep;
-				break;
+			event.deltaX = keyStep;
+			break;
 			case 38:
-				event.deltaY = keyStep;
-				break;
+			event.deltaY = keyStep;
+			break;
 			case 40:
-				event.deltaY = -keyStep;
-				break;
+			event.deltaY = -keyStep;
+			break;
 		}
 		notify(e);
 	}
@@ -562,8 +568,15 @@ var VirtualScroll = (function(document) {
 })(document);
 
 function isIE () {
-  var myNav = navigator.userAgent.toLowerCase();
-  return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+	var myNav = navigator.userAgent.toLowerCase();
+	return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+}
+
+function isSafari() {
+	var myNav = navigator.userAgent.toLowerCase();
+	console.log(myNav)
+	console.log(myNav.indexOf('safari'))
+	return( myNav.indexOf('safari') == -1 );
 }
 
 function isTablet() {
