@@ -1,9 +1,6 @@
 window.onload = function() {
 
-	console.log( isSafari() );
-
 	if ( ( isIE() && isIE() <= 9 ) || isSafari() || isTablet() ) {
-		alert('penis')
 		window.smoothScroll = new SmoothScroll( false );
 	}
 	else {
@@ -573,10 +570,14 @@ function isIE () {
 }
 
 function isSafari() {
-	var myNav = navigator.userAgent.toLowerCase();
-	console.log(myNav)
-	console.log(myNav.indexOf('safari'))
-	return( myNav.indexOf('safari') == -1 );
+	var ua = navigator.userAgent.toLowerCase();
+
+	if (ua.indexOf('safari') != -1) { 
+		if (ua.indexOf('chrome') > -1)
+			return false;
+		else
+			return true;
+	}
 }
 
 function isTablet() {
